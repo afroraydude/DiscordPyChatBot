@@ -8,10 +8,26 @@ except ImportError:
 
 from chatterbot import ChatBot
 
+from chatterbot.trainers import ListTrainer
+
 chatbot = ChatBot('bot', trainer='chatterbot.trainers.ChatterBotCorpusTrainer')
 
 # Train based on the english corpus
 chatbot.train("chatterbot.corpus.english")
+
+chatbot.set_trainer(ListTrainer)
+
+conversation = [
+    "Hello",
+    "Hi there!",
+    "How are you doing?",
+    "I'm doing great.",
+    "That is good to hear",
+    "Thank you.",
+    "You're welcome."
+]
+
+chatbot.train(conversation)
 
 client = discord.Client()
 
@@ -29,6 +45,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     messageContent = message.content
+    print (messageContent)
 
     response = chatbot.get_response(messageContent)
 

@@ -56,3 +56,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# My custom stuff
+config.ini
